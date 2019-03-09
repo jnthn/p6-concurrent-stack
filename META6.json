@@ -1,7 +1,7 @@
 {
     "perl"          : "6.*",
     "name"          : "Concurrent::Stack",
-    "version"       : "1.0",
+    "version"       : "1.1",
     "description"   : "A lock-free concurrent stack data structure.",
     "authors"       : [ "Jonathan Worthington <jnthn@jnthn.net>" ],
     "license"       : "Artistic-2.0",
