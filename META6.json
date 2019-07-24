@@ -1,14 +1,16 @@
 {
-    "perl"          : "6.*",
-    "name"          : "Concurrent::Stack",
-    "version"       : "1.1",
-    "description"   : "A lock-free concurrent stack data structure.",
-    "authors"       : [ "Jonathan Worthington <jnthn@jnthn.net>" ],
-    "license"       : "Artistic-2.0",
-    "depends"       : [ ],
-    "provides"      : {
-        "Concurrent::Stack": "lib/Concurrent/Stack.pm6"
-    },
-    "resources": [],
-    "source-url"    : "https://github.com/jnthn/p6-concurrent-stack.git"
+  "name": "Concurrent::Stack",
+  "description": "A lock-free concurrent stack data structure.",
+  "version": "1.2",
+  "perl": "6.*",
+  "authors": [
+    "Jonathan Worthington <jnthn@jnthn.net>"
+  ],
+  "depends": [],
+  "provides": {
+    "Concurrent::Stack": "lib/Concurrent/Stack.pm6"
+  },
+  "resources": [],
+  "license": "Artistic-2.0",
+  "source-url": "https://github.com/jnthn/p6-concurrent-stack.git"
 }
