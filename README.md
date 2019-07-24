@@ -20,6 +20,8 @@ A lock-free stack data structure, safe for concurrent use.
     $stack.push('k');
     say $stack.peek;        # k
     say $stack.elems;       # 25
+    say $stack.Seq;         # A Seq iterating a snapshot of the stack
+    say $stack.list;        # A lazy List with a snapshot of the stack
 
     $stack.pop for ^25;
     say $stack.elems;       # 0
@@ -78,3 +80,15 @@ pushing/popping from the stack at the point this method is called. Never use
 the result of `Bool` to decide whether to `peek` or `pop`, since another
 thread may `pop` in the meantime. Instead, check if `peek` or `pop` return a
 `Failure`.
+
+#### Seq()
+
+Returns a `Seq` that will iterate to a snapshot of the stack content,
+starting from the stack top. The snapshot is made at the time this
+method is called.
+
+#### list()
+
+Returns a `List` that will lazily evaluate to a snapshot of the stack
+content, starting from the stack top. The snapshot is made at the time
+this method is called.

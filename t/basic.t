@@ -4,14 +4,23 @@ use Test;
 given Concurrent::Stack.new -> $cs {
     is $cs.elems, 0, 'No elements at the start';
     nok ?$cs, 'Empty stack is falsey';
+    is $cs.Seq.elems, 0, 'Empty stack snapshots to empty Seq';
+    is-deeply $cs.list, (), 'Empty stack snapshots to empty list';
+
     lives-ok { $cs.push('so lock-free') }, 'Can push a value';
     is $cs.elems, 1, '1 element after pushing';
     ok ?$cs, 'Stack with a value is truthy';
     is $cs.peek, 'so lock-free', 'Can peek when 1 value';
     is $cs.elems, 1, 'Still 1 element after peeking';
+    is-deeply $cs.Seq, ('so lock-free',).Seq,
+            'Correct Seq with one element on stack';
+    is-deeply $cs.list, ('so lock-free',),
+            'Correct list with one element on stack';
     is $cs.pop, 'so lock-free', 'Can pop when 1 value';
     is $cs.elems, 0, 'No elements after popping the only value';
     nok ?$cs, 'Now-empty stack is falsey';
+    is $cs.Seq.elems, 0, 'Now-empty stack snapshots to empty Seq';
+    is-deeply $cs.list, (), 'Now-empty stack snapshots to empty list';
 
     my $try-peek = $cs.peek;
     isa-ok $try-peek, Failure, 'Trying to peek an empty stack fails';
@@ -34,6 +43,10 @@ given Concurrent::Stack.new -> $cs {
     is $cs.pop, 'f', 'Popping gives expected value';
     is $cs.pop, 'e', 'Popping again gives expected value';
     is $cs.elems, 4, 'Elements is 4 after 6 pushes and 2 pops';
+    is-deeply $cs.Seq, <d c b a>.Seq,
+            'Correct Seq after these operations';
+    is-deeply $cs.list, <d c b a>,
+            'Correct list after these operations';
 }
 
 done-testing;

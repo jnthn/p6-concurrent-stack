@@ -46,4 +46,16 @@ class Concurrent::Stack {
     multi method Bool(Concurrent::Stack:D: --> Bool) {
         $!elems != 0
     }
+
+    multi method Seq(Concurrent::Stack:D: --> Seq) {
+        my Node $current = ⚛$!head;
+        gather while $current {
+            take $current.value;
+            $current = $current.next;
+        }
+    }
+
+    multi method list(Concurrent::Stack:D: --> List) {
+        self.Seq.list
+    }
 }
